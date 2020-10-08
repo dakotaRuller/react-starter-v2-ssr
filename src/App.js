@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components';
 
 //Context
 import { ThemeContextProvider } from '@/contexts/themeContext';
+import clientLoadedContext from '@/contexts/clientLoadedContext';
 
 //Styled Components
 import GlobalStyles from '@/styled-components/global/GlobalStyles';
@@ -16,9 +17,10 @@ import Navbar from '@/components/global/navigation/Navbar';
 import AppLoadingAnimation from '@/components/animations/AppLoadingAnimation';
 
 const App = ({ children }) => {
+  const clientIsLoadedContext = useContext(clientLoadedContext);
   const [clientIsLoaded, updateClientIsLoaded] = useState(false);
 
-  const {reload} = useRouter();
+  const { reload } = useRouter();
 
   const [theme, updateTheme] = useState({
     theme: 'light',
@@ -44,24 +46,34 @@ const App = ({ children }) => {
     if (storedTheme) {
       updateTheme(JSON.parse(storedTheme));
     }
-    setTimeout(() => updateClientIsLoaded(true), 500)
+    setTimeout(() => {
+      clientIsLoadedContext.toggleClientIsLoaded(true);
+      //For some reason the client side routing only works with the client loading animation if
+      //the line below runs so ill leave it for now
+      updateClientIsLoaded(true);
+    }, 500);
   }, []);
 
   return (
-        <ThemeContextProvider
-          value={{
-            ...theme,
-            toggleTheme: () => toggleTheme(),
-          }}
-        >
-          <ThemeProvider theme={theme}>
-            <div className={'app'}>
-              <GlobalStyles/>
-              <Navbar/>
-              {clientIsLoaded ? children : <AppLoadingAnimation/>}
-            </div>
-          </ThemeProvider>
-        </ThemeContextProvider>
+    <ThemeContextProvider
+      value={{
+        ...theme,
+        toggleTheme: () => toggleTheme(),
+      }}
+    >
+      <ThemeProvider theme={theme}>
+        <div className={'app'}>
+          {console.log(clientIsLoadedContext)}
+          <GlobalStyles />
+          <Navbar />
+          {clientIsLoadedContext.clientIsLoaded ? (
+            children
+          ) : (
+            <AppLoadingAnimation />
+          )}
+        </div>
+      </ThemeProvider>
+    </ThemeContextProvider>
   );
 };
 

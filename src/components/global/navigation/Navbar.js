@@ -1,4 +1,4 @@
-//Node Moudules
+//Node Modules
 import React from 'react';
 import Link from 'next/link';
 
@@ -12,8 +12,8 @@ const Navbar = () => {
   return (
     <StyledNavbar>
       <div className={'navigation-links'}>
-        <Link href={'/'}>Home</Link>
-        <Link href={'/page-two'}>Page Two</Link>
+        <Link href='/'><a>Home</a></Link>
+        <Link href='/technologies'><a>Technologies</a></Link>
       </div>
       <ThemeSwitcher />
     </StyledNavbar>

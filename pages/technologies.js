@@ -1,17 +1,15 @@
-//Node Modules
-import Head from 'next/head';
-
 //Components
 import App from 'src/App';
+import Head from 'next/head';
 
-const PageTwo = (props) => {
+const Technologies = (props) => {
   return (
     <>
       <Head>
-        <title>Welcome</title>
+        <title>Technologies</title>
       </Head>
       <App>
-        <p>Page Two Dude</p>
+        <p>Technologies Page</p>
       </App>
     </>
   );
@@ -34,4 +32,4 @@ export function getServerSideProps(context) {
   };
 }
 
-export default PageTwo;
+export default Technologies;

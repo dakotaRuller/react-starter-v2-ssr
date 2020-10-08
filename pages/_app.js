@@ -1,15 +1,13 @@
 //Node Modules
-import React, { useContext, useState } from "react"
+import React, { useContext, useState } from 'react';
 
-//Components
-import App from 'src/App';
+//Contexts
+// import { ClientLoadedContextProvider } from '@/contexts/clientLoadedContext';
 
 function MyApp({ Component, pageProps }) {
   return (
     <main>
-      <App>
-        <Component {...pageProps} />
-      </App>
+      <Component {...pageProps} />
     </main>
   );
 }
