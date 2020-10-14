@@ -4,7 +4,7 @@ import Head from 'next/head';
 
 //Components
 import App from 'src/App';
-import { BasicButton, BasicWrapper } from '@/styled-components/index';
+import Landing from '@/components/landing/Landing';
 
 const Home = () => {
   const [pinkButton, togglePinkButton] = useState(false);
@@ -15,19 +15,10 @@ const Home = () => {
         <title>Welcome</title>
       </Head>
       <App>
-        <p>Home Page</p>
-        {pinkButton ? (
-          <BasicButton onClick={() => togglePinkButton(false)}>
-            Hello I'm a Button
-          </BasicButton>
-        ) : (
-          <BasicButton blue onClick={() => togglePinkButton(true)}>
-            Hello I'm a Button
-          </BasicButton>
-        )}
+        <Landing />
       </App>
     </>
   );
-}
+};
 
-export default Home
+export default Home;

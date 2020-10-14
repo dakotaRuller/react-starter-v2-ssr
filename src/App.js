@@ -63,14 +63,15 @@ const App = ({ children }) => {
     >
       <ThemeProvider theme={theme}>
         <div className={'app'}>
-          {console.log(clientIsLoadedContext)}
           <GlobalStyles />
           <Navbar />
-          {clientIsLoadedContext.clientIsLoaded ? (
-            children
-          ) : (
-            <AppLoadingAnimation />
-          )}
+          <div className={'content-wrapper'}>
+            {clientIsLoadedContext.clientIsLoaded ? (
+              children
+            ) : (
+              <AppLoadingAnimation />
+            )}
+          </div>
         </div>
       </ThemeProvider>
     </ThemeContextProvider>
