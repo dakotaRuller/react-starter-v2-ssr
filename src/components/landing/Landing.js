@@ -1,8 +1,12 @@
 //Node Modules
 import React from 'react';
+import Link from 'next/link';
 
 //Styled Components
 import StyledLanding from '@/styled-components/landing/StyledLanding';
+
+//Scripts
+import { appLinks } from '@/src/scripts/constants';
 
 const Landing = () => {
   return (
@@ -29,6 +33,21 @@ const Landing = () => {
           create-next-app
         </a>{' '}
         and build out to be easy to edit yourself and navigate.
+      </p>
+      <p>
+        Building out an entire application from scratch can be quite a daunting
+        task when you're first starting out and next.js helps mitigate all of
+        those architectural decisions being made at that point. This application
+        goes a step further and layers on a basic UI along with some other
+        functionality pieces on top of next.{' '}
+      </p>
+      <p>
+        Follow the links to the different pages and you'll learn all about
+        what's going on behind the scenes. Up next is{' '}
+        <Link href={appLinks.technologies}>
+          <a className={'styled-link'}>Technologies</a>
+        </Link>
+        .
       </p>
     </StyledLanding>
   );

@@ -28,7 +28,8 @@ const StyledNavbar = styled.header`
   background-color: ${(props) => props.theme.secondaryColor};
   color: ${(props) => props.theme.primaryColor};
   border-bottom-right-radius: 5px;
-  border-bottom-left-radius: ${(props) => (props.showMobileNav ? '0' : '5px')};
+  border-bottom-left-radius: 5px;
+  z-index: 1;
 
   div.nav-toggle {
     display: flex;
@@ -65,7 +66,7 @@ const StyledNavbar = styled.header`
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 40px;
+    top: 35px;
     left: -55%;
     opacity: 0;
     padding: 10px;
@@ -77,7 +78,10 @@ const StyledNavbar = styled.header`
     @media ${deviceQueries.desktop} {
       display: flex;
       flex-direction: row;
+      height: auto;
+      width: auto;
       position: static;
+      background-color: transparent;
       opacity: 1;
     }
   }

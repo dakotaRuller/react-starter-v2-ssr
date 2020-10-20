@@ -1,5 +1,5 @@
 //Node Modules
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 
 //Styled Components
@@ -8,22 +8,13 @@ import StyledNavbar from '@/styled-components/global/navigation/StyledNavbar';
 //Components
 import ThemeSwitcher from './ThemeSwitcher';
 
+//Scripts
+import { appLinks } from '@/src/scripts/constants';
+
 const Navbar = () => {
   const [showMobileNav, setShowMobileNav] = useState(false);
 
   const setMobileNav = () => {
-    //This could be viewed as a hack but this is the only way I could figure out how to make the z-index
-    //work with the positioning of the navbar and the styled links
-    const styledLinks = document.querySelectorAll('.styled-link');
-    if (!showMobileNav) {
-      styledLinks.forEach((i) => {
-        i.style.zIndex = '-1';
-      });
-    } else {
-      styledLinks.forEach((i) => {
-        i.style.zIndex = '0';
-      });
-    }
     setShowMobileNav(!showMobileNav);
   };
 
@@ -38,10 +29,10 @@ const Navbar = () => {
         <div className={'bottom'} />
       </div>
       <div className={`navigation-links${showMobileNav ? ' active' : ''}`}>
-        <Link href="/">
+        <Link href={appLinks.home}>
           <a>Home</a>
         </Link>
-        <Link href="/technologies">
+        <Link href={appLinks.technologies}>
           <a>Technologies</a>
         </Link>
       </div>
