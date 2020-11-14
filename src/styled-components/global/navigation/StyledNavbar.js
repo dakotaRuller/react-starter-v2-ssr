@@ -3,7 +3,7 @@ import {
   colors,
   deviceQueries,
   transitions,
-} from 'src/styled-components/variables';
+} from '@/src/styled-components/variables';
 
 const navOpenAnimation = keyframes`
   0% {

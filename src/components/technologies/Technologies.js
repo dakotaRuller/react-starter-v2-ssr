@@ -46,8 +46,8 @@ const Technologies = () => {
         make it work as seamlessly as it does.
       </p>
       <ul className={'technologies-list'}>
-        {technologiesList.map(({ name, link, description }) => (
-          <li>
+        {technologiesList.map(({ name, link, description }, id) => (
+          <li key={id}>
             <a className={'styled-link'} href={link} target={'_blank'}>
               {name}
             </a>

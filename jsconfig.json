@@ -5,7 +5,8 @@
       "@/components/*": ["src/components/*"],
       "@/contexts/*": ["src/contexts/*"],
       "@/styled-components/*": ["src/styled-components/*"],
-      "@/src/*": ["src/*"]
+      "@/src/*": ["src/*"],
+      "@/mocks/*": ["__mocks__/*"]
     }
   }
 }

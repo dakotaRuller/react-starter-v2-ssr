@@ -1,5 +1,5 @@
 //Node Modules
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useReducer } from 'react';
 import { useRouter } from 'next/router';
 import { ThemeProvider } from 'styled-components';
 
@@ -16,36 +16,58 @@ import { colors } from '@/styled-components/variables';
 import Navbar from '@/components/global/navigation/Navbar';
 import AppLoadingAnimation from '@/components/animations/AppLoadingAnimation';
 
+//Global Reducers
+const themeActions = {
+  setTheme: 'SET_THEME',
+  toggleTheme: 'TOGGLE_THEME',
+};
+
+const themeReducer = (state, action) => {
+  switch (action.type) {
+    case themeActions.setTheme:
+      return action.value;
+    case themeActions.toggleTheme:
+      const updatedThemeState = {
+        theme: state.isDarkTheme ? 'light' : 'dark',
+        isDarkTheme: !state.isDarkTheme,
+        primaryColor: state.isDarkTheme ? colors.white : colors.black,
+        secondaryColor: state.isDarkTheme ? colors.black : colors.white,
+      };
+      window.localStorage.setItem('theme', JSON.stringify(updatedThemeState));
+      return updatedThemeState;
+    default:
+      return state;
+  }
+};
+
+const initialThemeState = {
+  theme: 'light',
+  isDarkTheme: false,
+  primaryColor: colors.white,
+  secondaryColor: colors.black,
+};
+
 const App = ({ children }) => {
-  const clientIsLoadedContext = useContext(clientLoadedContext);
-  const [clientIsLoaded, updateClientIsLoaded] = useState(false);
+  const clientIsLoadedContext = React.useContext(clientLoadedContext);
+  const [clientIsLoaded, updateClientIsLoaded] = React.useState(false);
+  const [themeState, themeDispatch] = useReducer(
+    themeReducer,
+    initialThemeState
+  );
 
-  const { reload } = useRouter();
-
-  const [theme, updateTheme] = useState({
-    theme: 'light',
-    isDarkTheme: false,
-    primaryColor: colors.white,
-    secondaryColor: colors.black,
-  });
-
-  const toggleTheme = () => {
-    const updatedTheme = {
-      theme: theme.isDarkTheme ? 'light' : 'dark',
-      isDarkTheme: !theme.isDarkTheme,
-      primaryColor: theme.isDarkTheme ? colors.white : colors.black,
-      secondaryColor: theme.isDarkTheme ? colors.black : colors.white,
-    };
-    window.localStorage.setItem('theme', JSON.stringify(updatedTheme));
-    updateTheme(updatedTheme);
-    setTimeout(() => reload(), 50);
+  const toggleTheme = async () => {
+    await themeDispatch({ type: themeActions.toggleTheme });
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     const storedTheme = window.localStorage.getItem('theme');
     if (storedTheme) {
-      updateTheme(JSON.parse(storedTheme));
+      themeDispatch({
+        type: themeActions.setTheme,
+        value: JSON.parse(storedTheme),
+      });
     }
+
     setTimeout(() => {
       clientIsLoadedContext.toggleClientIsLoaded(true);
       //For some reason the client side routing only works with the client loading animation if
@@ -57,11 +79,11 @@ const App = ({ children }) => {
   return (
     <ThemeContextProvider
       value={{
-        ...theme,
+        ...themeState,
         toggleTheme: () => toggleTheme(),
       }}
     >
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={themeState}>
         <div className={'app'}>
           <GlobalStyles />
           <Navbar />

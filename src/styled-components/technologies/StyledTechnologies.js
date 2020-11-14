@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { colors, deviceQueries } from 'src/styled-components/variables';
+import { colors, deviceQueries } from '@/src/styled-components/variables';
 
 const StyledTechnologies = styled.div`
   display: flex;
