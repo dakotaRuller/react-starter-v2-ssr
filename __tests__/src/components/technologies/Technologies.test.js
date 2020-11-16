@@ -9,6 +9,9 @@ import { technologiesContent } from '@/mocks/technologies/technologies';
 //Components
 import Technologies from '@/components/technologies/Technologies';
 
+//Scripts
+import { appLinks } from '@/src/scripts/constants';
+
 describe('<Technologies/>', () => {
   let wrapper;
 
@@ -30,5 +33,11 @@ describe('<Technologies/>', () => {
       expect(technologyItem.find('a').text()).toBe(name);
       expect(technologyItem.find('p').text()).toBe(description);
     });
+  });
+
+  test('should have link to testing page', () => {
+    expect(wrapper.find(Link)).toHaveLength(1);
+    expect(wrapper.find(Link).find('a').text()).toBe('Testing');
+    expect(wrapper.find(Link).props().href).toBe(appLinks.testing);
   });
 });

@@ -35,6 +35,9 @@ const Navbar = () => {
         <Link href={appLinks.technologies}>
           <a>Technologies</a>
         </Link>
+        <Link href={appLinks.testing}>
+          <a>Testing</a>
+        </Link>
       </div>
       <ThemeSwitcher />
     </StyledNavbar>

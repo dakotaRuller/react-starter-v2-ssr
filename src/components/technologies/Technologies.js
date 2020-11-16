@@ -1,8 +1,12 @@
 //Node Modules
 import React, { useState } from 'react';
+import Link from 'next/link';
 
 //Styled Components
 import StyledTechnologies from '@/styled-components/technologies/StyledTechnologies';
+
+//Scripts
+import { appLinks } from '@/src/scripts/constants';
 
 const Technologies = () => {
   const [technologiesList, updateTechnologiesList] = useState([
@@ -55,6 +59,12 @@ const Technologies = () => {
           </li>
         ))}
       </ul>
+      <p>
+        Last but not least is{' '}
+        <Link href={appLinks.testing}>
+          <a className={'styled-link'}>Testing</a>
+        </Link>
+      </p>
     </StyledTechnologies>
   );
 };

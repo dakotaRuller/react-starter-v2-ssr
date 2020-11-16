@@ -1,6 +1,5 @@
 //Node Modules
 import React, { useReducer } from 'react';
-import { useRouter } from 'next/router';
 import { ThemeProvider } from 'styled-components';
 
 //Context

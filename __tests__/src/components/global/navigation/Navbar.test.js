@@ -31,9 +31,10 @@ describe('<Navbar/>', () => {
   test('should have div.navigation-links component', () => {
     const navLinksChildren = wrapper.find('.navigation-links').children();
     expect(wrapper.find('.navigation-links')).toHaveLength(1);
-    expect(navLinksChildren).toHaveLength(2);
+    expect(navLinksChildren).toHaveLength(3);
     expect(navLinksChildren.at(0).find('a').text()).toBe('Home');
     expect(navLinksChildren.at(1).find('a').text()).toBe('Technologies');
+    expect(navLinksChildren.at(2).find('a').text()).toBe('Testing');
   });
 
   test('should have ThemeSwitcher component', () => {

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Head from 'next/head';
 
 //Components
-import App from 'src/App';
+import App from '@/src/App';
 import Landing from '@/components/landing/Landing';
 
 const Home = () => {
